@@ -1,6 +1,6 @@
 # Claude Code Configuration
 
-Claude Code skills and plans.
+Claude Code skills, commands, agents, and hooks.
 
 ## Setup
 
@@ -13,8 +13,16 @@ claude login
 
 ```
 claude/
-├── skills/           # Custom skills
-│   └── note-writer/  # note.com article writing skill
-├── plans/            # Planning documents
-└── install.sh        # Setup script (creates symlinks)
+├── skills/      # Custom skills
+├── plans/       # Planning documents
+├── commands/    # Slash commands (/command-name)
+├── agents/      # Subagents
+└── hooks/       # Automation hooks
 ```
+
+## Usage
+
+- **skills/**: Define reusable skills with SKILL.md
+- **commands/**: Create slash commands (e.g., /my-command)
+- **agents/**: Define custom subagents
+- **hooks/**: Automate actions on events

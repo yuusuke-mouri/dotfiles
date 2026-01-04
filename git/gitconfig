@@ -1,0 +1,30 @@
+# ~/.gitconfig
+# Git configuration (managed by dotfiles)
+
+[user]
+    name = yuusuke-mouri
+    # email is set in ~/.gitconfig.local (machine-specific)
+
+[core]
+    editor = vim
+
+[alias]
+    st = status
+    co = checkout
+    br = branch
+    ci = commit
+    df = diff
+    lg = log --oneline --graph --decorate
+
+[ghq]
+    root = ~/projects
+
+[init]
+    defaultBranch = main
+
+[pull]
+    rebase = false
+
+# Include machine-specific settings
+[include]
+    path = ~/.gitconfig.local

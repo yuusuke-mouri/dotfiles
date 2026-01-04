@@ -1,0 +1,33 @@
+# ~/.zshrc
+# Zsh configuration (macOS)
+
+# === History ===
+HISTSIZE=1000
+SAVEHIST=2000
+HISTFILE=~/.zsh_history
+setopt HIST_IGNORE_DUPS
+setopt HIST_IGNORE_SPACE
+setopt APPEND_HISTORY
+
+# === Prompt ===
+autoload -Uz promptinit
+promptinit
+# Simple prompt: user@host:dir %
+PROMPT='%F{green}%n@%m%f:%F{blue}%~%f%# '
+
+# === Completion ===
+autoload -Uz compinit
+compinit
+
+# === Key Bindings ===
+bindkey -e  # Emacs-style key bindings
+
+# === Load Common Settings ===
+if [ -f ~/dotfiles/shell/common.sh ]; then
+    source ~/dotfiles/shell/common.sh
+fi
+
+# === Local Overrides ===
+if [ -f ~/.zshrc.local ]; then
+    source ~/.zshrc.local
+fi
