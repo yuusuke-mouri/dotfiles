@@ -33,5 +33,19 @@ for dir in $DIRS; do
     fi
 done
 
+# Symlink ~/CLAUDE.md
+CLAUDE_MD="$HOME/CLAUDE.md"
+if [ -f "$CLAUDE_MD" ] && [ ! -L "$CLAUDE_MD" ]; then
+    echo "Backing up existing ~/CLAUDE.md"
+    mv "$CLAUDE_MD" "$CLAUDE_MD.bak"
+fi
+
+if [ ! -L "$CLAUDE_MD" ]; then
+    ln -s "$SCRIPT_DIR/CLAUDE.md" "$CLAUDE_MD"
+    echo "Created symlink: ~/CLAUDE.md"
+else
+    echo "Symlink already exists: ~/CLAUDE.md"
+fi
+
 echo ""
 echo "Done! Run 'claude login' to authenticate (required on each machine)"
