@@ -15,14 +15,24 @@ export LANG=en_US.UTF-8
 
 # === PATH ===
 # Homebrew (macOS Apple Silicon)
-if [[ -d /opt/homebrew/bin ]]; then
+# Note: brew shellenv should be in .zprofile for login shells
+if [[ -d /opt/homebrew/bin ]] && [[ ":$PATH:" != *":/opt/homebrew/bin:"* ]]; then
   export PATH="/opt/homebrew/bin:$PATH"
 fi
 
-# === nvm ===
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
+# === asdf ===
+# Skip if already loaded (e.g., from .zprofile)
+if [[ -z "$ASDF_DIR" ]] && [[ -f /opt/homebrew/opt/asdf/libexec/asdf.sh ]]; then
+  . /opt/homebrew/opt/asdf/libexec/asdf.sh
+fi
+
+# === Java ===
+if [[ -x /usr/libexec/java_home ]]; then
+  export JAVA_HOME=$(/usr/libexec/java_home -v 17 2>/dev/null)
+  if [[ -n "$JAVA_HOME" ]]; then
+    export PATH=$JAVA_HOME/bin:$PATH
+  fi
+fi
 
 # === SDKMAN (must be at end) ===
 export SDKMAN_DIR="$HOME/.sdkman"
@@ -49,5 +59,28 @@ case "$(uname -s)" in
   Darwin*)
     # macOS specific
     alias ls='ls -G'
+
+    # MySQL client
+    if [[ -d /opt/homebrew/opt/mysql-client/bin ]]; then
+      export PATH="/opt/homebrew/opt/mysql-client/bin:$PATH"
+    fi
+
+    # Windsurf
+    if [[ -d "$HOME/.codeium/windsurf/bin" ]]; then
+      export PATH="$HOME/.codeium/windsurf/bin:$PATH"
+    fi
+
+    # Antigravity
+    if [[ -d "$HOME/.antigravity/antigravity/bin" ]]; then
+      export PATH="$HOME/.antigravity/antigravity/bin:$PATH"
+    fi
+
+    # Kiro
+    if [[ "$TERM_PROGRAM" == "kiro" ]]; then
+      [[ -f "$(kiro --locate-shell-integration-path zsh 2>/dev/null)" ]] && . "$(kiro --locate-shell-integration-path zsh)"
+    fi
+
+    # OrbStack
+    [[ -f ~/.orbstack/shell/init.zsh ]] && source ~/.orbstack/shell/init.zsh 2>/dev/null
     ;;
 esac

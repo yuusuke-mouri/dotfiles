@@ -23,8 +23,9 @@ compinit
 bindkey -e  # Emacs-style key bindings
 
 # === Load Common Settings ===
-if [ -f ~/dotfiles/shell/common.sh ]; then
-    source ~/dotfiles/shell/common.sh
+DOTFILES_DIR="${DOTFILES_DIR:-$HOME/dev/github.com/yuusuke-mouri/dotfiles}"
+if [ -f "$DOTFILES_DIR/shell/common.sh" ]; then
+    source "$DOTFILES_DIR/shell/common.sh"
 fi
 
 # === Local Overrides ===
