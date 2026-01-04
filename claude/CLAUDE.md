@@ -15,5 +15,6 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Git
 
-- Commit messages: concise, in English
+- Commit messages: 日本語で簡潔に
+  - 直感的でない変更や workaround の場合は背景も説明する
 - Branch names: kebab-case (e.g., feature/add-login)
