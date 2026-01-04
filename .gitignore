@@ -1,0 +1,8 @@
+# Credentials and tokens (should never be in this directory, but just in case)
+*.credentials*
+*.token*
+.credentials.json
+
+# OS generated files
+.DS_Store
+Thumbs.db
