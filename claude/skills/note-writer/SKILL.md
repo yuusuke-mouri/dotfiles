@@ -44,6 +44,12 @@ cd ~/.claude/skills/note-writer && python3 scripts/fetch_note_articles.py --outp
 - `references/backlog_themes.md` - 未執筆テーマリスト
 - `corpus/articles/` - 既存記事の文体・事例を参照可能に
 
+**白書データ（テーマに応じて）**:
+- `references/hakusyo/README.md` - 白書データの使い方
+- `references/hakusyo/hakusyo_index.md` - 白書の目次・構造
+- `references/hakusyo/case_studies.md` - 事例一覧（18社）
+- `references/hakusyo/note_topics.md` - 記事ネタ集
+
 ### Phase 1: 入力項目の自動構築
 
 スキルが references/ から自動入力し、ユーザーは最小確認のみ。
@@ -80,8 +86,32 @@ cd ~/.claude/skills/note-writer && python3 scripts/fetch_note_articles.py --outp
 
 - Web検索で上位記事を分析
 - 公的統計・調査レポートを収集
+- **白書データの活用**（下記テーマの場合）
 - ターゲットのJTBD（本当に解決したい課題）を言語化
 - キラーインサイト候補を3つ仮説立て → 最も強力な1つを採用
+
+**白書データを活用するテーマ**:
+- DX・デジタル化・IT投資
+- 価格転嫁・値上げ・適正価格
+- 賃上げ・人件費・労働分配率
+- 人手不足・採用・人材育成
+- 事業承継・後継者・M&A
+- 経営戦略・経営力・経営計画
+- GX・脱炭素・サステナビリティ
+- スケールアップ・成長戦略
+
+上記テーマの場合、`references/hakusyo/` のデータを参照し:
+1. 該当する統計データを抽出（出典明記）
+2. 関連事例（18社）から具体例を選定
+3. ターゲット別の切り口・Painを確認
+
+**詳細データが必要な場合はDify APIで検索**:
+```bash
+curl -s -X POST 'https://dify.ravi.fukuoka.jp/v1/chat-messages' \
+  -H 'Authorization: Bearer app-2ZWUFIhY2QMuc6OKom6VQkev' \
+  -H 'Content-Type: application/json' \
+  -d '{"inputs": {}, "query": "【検索内容】", "response_mode": "blocking", "user": "note-writer"}'
+```
 
 ### Phase 3: 構成提案
 
@@ -144,3 +174,16 @@ cd ~/.claude/skills/note-writer && python3 scripts/fetch_note_articles.py --outp
 - `references/backlog_themes.md` - 未執筆テーマリスト
 - `references/writing_prompt.md` - 記事執筆プロンプトテンプレート
 - `corpus/articles/` - 既存記事（参考用）
+
+### 白書データ（references/hakusyo/）
+
+中小企業白書・小規模企業白書（2025年版）のデータ:
+- `hakusyo/README.md` - 使い方ガイド
+- `hakusyo/hakusyo_index.md` - 白書の目次・構造
+- `hakusyo/case_studies.md` - 事例一覧（18社、★★★評価付き）
+- `hakusyo/note_topics.md` - ターゲット別記事ネタ集
+
+**PDFパス**:
+```
+~/Data/Obsidian/yuusuke.ap/02_Projects/Active/note.com2025AdventCalendar/中小企業白書2025/
+```
