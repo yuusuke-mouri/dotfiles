@@ -183,7 +183,13 @@ curl -s -X POST 'https://dify.ravi.fukuoka.jp/v1/chat-messages' \
 - `hakusyo/case_studies.md` - 事例一覧（18社、★★★評価付き）
 - `hakusyo/note_topics.md` - ターゲット別記事ネタ集
 
-**PDFパス**:
+**Dify RAG API**:
 ```
-~/Data/Obsidian/yuusuke.ap/02_Projects/Active/note.com2025AdventCalendar/中小企業白書2025/
+URL: https://dify.ravi.fukuoka.jp/v1/chat-messages
+API Key: app-2ZWUFIhY2QMuc6OKom6VQkev
+```
+
+**PDFパス（ローカルキャッシュ）**:
+```
+~/dev/gitlab.com/ravi-fukuoka-jp/internal/references/local/中小企業白書2025/
 ```
